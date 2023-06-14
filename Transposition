@@ -1,0 +1,144 @@
+package com.ns.assignment;
+
+public class TwoLevelTRansposition {
+	
+	
+	
+	
+	// two level transposition
+	public static String encryption(String plainText) {
+		
+		
+		int length=plainText.length();
+		
+		char[] transPsdText=new char[length];
+		
+		
+		int i=0,j=length;
+		
+		for(int k=0;k<length;k++) {
+			
+			transPsdText[k]=plainText.charAt(k%2==0?i++:--j);
+			
+		}
+		
+		String level1Cipher=new String(transPsdText);
+		
+		System.out.println("\n\nCipher text after level 1 Transposition : "+level1Cipher);
+		
+		StringBuilder level2Cipher=new StringBuilder();
+		
+		for(int k=0;k<length;k++) {
+			
+			level2Cipher.append(level1Cipher.charAt((k+4)%length));
+			
+		}
+		
+		System.out.println("\n\nPlain text after level 2 Transposition : "+level2Cipher.toString());
+		
+		return level2Cipher.toString();
+	}
+	
+	
+	
+	
+	public static String decryption(String cipherText) {
+		
+		
+		int length=cipherText.length();
+		
+		
+		int i=0,j=length;
+		
+		StringBuilder level1PlainTxt=new StringBuilder();
+		
+		for(int k=0;k<length;k++) {
+			
+			int index=(k-4)%length;
+			
+			level1PlainTxt.append(cipherText.charAt(index<0?index+length:index));
+			
+		}
+		
+		
+		System.out.println("\n\nPlain text after level 1 Transposition : "+level1PlainTxt.toString());
+		
+		
+		
+		char[] level2Cipher=new char[length];
+		
+		
+		for(int k=0;k<length;k++) {
+			
+			level2Cipher[k%2==0?i++:--j]=level1PlainTxt.charAt(k);
+			
+		}
+		
+		
+		
+		
+		
+		return new String(level2Cipher);
+		
+	}
+	
+	
+	
+	
+	
+	
+
+}
+
+
+
+
+
+
+
+
+
+
+//main class
+
+package com.ns.assignment;
+
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+
+		// creating scanner class's oblect
+		Scanner input = new Scanner(System.in);
+
+		System.out.print("Please enter the Plain Text : ");
+		String plainText = input.nextLine(); // input plain text
+
+		System.out.println("\n\nInputed Plain text : " + plainText);
+		System.out.println("\n\nEncrypting...\n\n");
+
+		String cipherText = TwoLevelTRansposition.encryption(plainText); // encrypting two times
+
+		System.out.println("\n\nFinal Cipher text : " + cipherText);
+
+		System.out.println("\n\nEncrypted Cipher text : " + cipherText);
+		System.out.println("\n\n");
+		String finalPlainText = TwoLevelTRansposition.decryption(cipherText); // decrypting two times
+		System.out.println("\n\nDeccrypting...\n");
+
+		System.out.println("\n\nDecrypted Plain text : " + finalPlainText);
+
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
