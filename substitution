@@ -1,0 +1,80 @@
+package com.ns.assignment;
+
+public class TwoLevelSubstitution {
+	
+	//keyset
+	public static final String keySet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	
+	//subkeys
+    public static final String sbk1 = "QRACBZFKYOLDHVMUJIWSTXGNPE";
+    public static final String sbk2 = "MWLRQEJYNVAZGHBXTOFCDPKUIS";
+	
+	
+    
+    
+    //substitution round
+    
+    public static StringBuilder subRound(String plainText, String keySet, String key) {
+    	StringBuilder cipherText =new StringBuilder();
+    	
+    	for(char lt:plainText.toUpperCase().toCharArray()) {
+    		
+    		if(Character.isLetter(lt)) {
+    			int index=keySet.indexOf(lt);
+    			cipherText.append(key.charAt(index));
+    			
+    			
+    		}else {
+    			
+    			cipherText.append(lt);
+    		}
+    		
+    	}
+    	
+   
+    	return cipherText;
+    }
+    
+    
+   //end of substitution round
+    
+    
+    
+    
+    
+    
+    //Two level Encryption Using two keys.
+    
+    public static String encryption(String plainText) {
+
+    	//level 1 substitution
+        StringBuilder level1Cipher = subRound(plainText, keySet, sbk1);
+        System.out.println("\n\nChipher text after one level substitution : "+level1Cipher.toString());
+       
+      //level 2 substitution
+        StringBuilder level2Cipher = subRound(level1Cipher.toString(), keySet, sbk2);
+        System.out.println("\n\nChipher text after two level substitution : "+level2Cipher.toString());
+
+        return level2Cipher.toString();
+    }
+
+    
+    
+    
+    
+    //Two level Encryption Using two keys.
+    
+    public static String decryption(String cipherText) {
+
+        StringBuilder plainText1 = subRound(cipherText, sbk2, keySet);
+        StringBuilder plainText2 = subRound(plainText1.toString(), sbk1, keySet);
+
+        return plainText2.toString();
+    }
+
+    
+    
+    
+	
+
+}
