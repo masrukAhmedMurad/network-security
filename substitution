@@ -78,3 +78,55 @@ public class TwoLevelSubstitution {
 	
 
 }
+
+
+
+
+
+//Main class
+
+
+
+
+package com.ns.assignment;
+
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+
+		//creating scanner class's oblect
+		Scanner input=new Scanner(System.in);
+		
+
+        
+        
+      
+		System.out.print("Please enter the Plain Text : ");
+		String plainText = input.nextLine();			//input plain text
+
+		System.out.println("\n\nInputed Plain text : "+plainText);
+		System.out.println("\n\nEncrypting...\n\n");
+
+		String cipherText = TwoLevelSubstitution.encryption(plainText);     // encrypting two times
+
+		System.out.println("\n\nFinal Cipher text : "+cipherText);
+
+		System.out.println("\n\nEncrypted Cipher text : "+cipherText);
+		System.out.println("\n\n");
+		String finalPlainText = TwoLevelSubstitution.decryption(cipherText); // decrypting two times
+		System.out.println("\n\nDeccrypting...\n");
+
+		System.out.println("\n\nDecrypted Plain text : "+finalPlainText);
+
+		
+		
+		
+	}
+
+}
+
+
+
+
